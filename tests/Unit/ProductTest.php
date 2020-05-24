@@ -8,16 +8,16 @@ use App\Stock;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ExampleTest extends TestCase
+class ProductTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function it_checks_for_stock_ar_retailers()
+    public function it_checks_for_stock_at_retailers()
     {
-        $switch = Product::create(['name' => 'Nintendo Stwich']);
-        $bestBy = Retailer::create(['name' => 'Best Buy']);
-        $this->assertFalse($switch->inStock());
+        $product = factory(Product::class)->create();
+        $retailer = factory(Retailer::class)->create();
+        $this->assertFalse($product->inStock());
 
         $stock = new Stock([
             'price' => 1000,
@@ -26,8 +26,8 @@ class ExampleTest extends TestCase
             'in_stock' => true
         ]);
 
-        $bestBy->addStock($switch, $stock);
+        $retailer->addStock($product, $stock);
 
-        $this->assertTrue($switch->inStock());
+        $this->assertTrue($product->inStock());
     }
 }

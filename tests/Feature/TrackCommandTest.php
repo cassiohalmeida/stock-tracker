@@ -19,9 +19,9 @@ class TrackCommandTest extends TestCase
     {
         //Given
         // I have a product with stock
-        $switch = Product::create(['name' => 'Nintendo Stwich']);
-        $bestBy = Retailer::create(['name' => 'Best Buy']);
-        $this->assertFalse($switch->inStock());
+        $product = factory(Product::class)->create();
+        $retailer = factory(Retailer::class)->create(['name' => 'Best Buy']);
+        $this->assertFalse($product->inStock());
 
         $stock = new Stock([
             'price' => 1000,
@@ -30,10 +30,7 @@ class TrackCommandTest extends TestCase
             'in_stock' => false
         ]);
 
-        $bestBy->addStock($switch, $stock);
-
-        $this->assertFalse($stock->fresh()->in_stock);
-
+        $retailer->addStock($product, $stock);
 
         Http::fake(function () {
             return [
