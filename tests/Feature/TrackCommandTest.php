@@ -20,7 +20,7 @@ class TrackCommandTest extends TestCase
         //Given
         // I have a product with stock
         $product = factory(Product::class)->create();
-        $retailer = factory(Retailer::class)->create(['name' => 'Best Buy']);
+        $retailer = factory(Retailer::class)->create(['name' => 'Walmart']);
         $this->assertFalse($product->inStock());
 
         $stock = new Stock([
