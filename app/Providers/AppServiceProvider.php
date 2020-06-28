@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Clients\ClientFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ClientFactory::class, function () {
+            return new ClientFactory;
+        });
     }
 
     /**

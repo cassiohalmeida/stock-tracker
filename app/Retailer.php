@@ -20,6 +20,6 @@ class Retailer extends Model
 
     public function client()
     {
-        return (new ClientFactory())->make($this);
+        return (app(ClientFactory::class))->make($this);
     }
 }
